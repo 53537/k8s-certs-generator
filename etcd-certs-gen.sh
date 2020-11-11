@@ -48,7 +48,7 @@ function openssl_req() {
 
 function openssl_sign() {
     echo "Generating ${3}/${4}.crt"
-    openssl ca -batch -config openssl.conf -extensions $5 -days 3650 -notext \
+    openssl ca -batch -config openssl.conf -extensions $5 -days 36500 -notext \
         -md sha256 -in ${3}/${4}.csr -out ${3}/${4}.crt \
         -cert ${1} -keyfile ${2}
 }
@@ -56,7 +56,7 @@ function openssl_sign() {
 if [ -z "$CA_KEY" -o -z "$CA_CERT" ]; then
     openssl genrsa -out $CERT_DIR/ca.key 4096
     openssl req -config openssl.conf \
-        -new -x509 -days 3650 -sha256 \
+        -new -x509 -days 36500 -sha256 \
         -key $CERT_DIR/ca.key -extensions v3_ca \
         -out $CERT_DIR/ca.crt -subj "/CN=etcd-ca"
     export CA_KEY="$CERT_DIR/ca.key"
